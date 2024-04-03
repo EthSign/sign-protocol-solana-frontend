@@ -1,18 +1,9 @@
 import * as anchor from "@coral-xyz/anchor";
-import { PublicKey } from "@solana/web3.js";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
-import { Attestation } from "@/types";
+import { Attestation, Schema } from "@/types";
 
 export function _createMockSchemas(wallet: AnchorWallet, startId: number = 0) {
-  let schema: {
-    id: anchor.BN;
-    registrant: PublicKey;
-    revocable: boolean;
-    dataLocation: any;
-    maxValidFor: anchor.BN;
-    timestamp: anchor.BN;
-    data: string;
-  } = {
+  let schema: Schema = {
     id: new anchor.BN(startId + 0),
     registrant: wallet.publicKey,
     revocable: true,
@@ -21,7 +12,7 @@ export function _createMockSchemas(wallet: AnchorWallet, startId: number = 0) {
     timestamp: new anchor.BN(0),
     data: "stupid0",
   };
-  let schema2 = {
+  let schema2: Schema = {
     id: new anchor.BN(startId + 1),
     registrant: wallet.publicKey,
     revocable: false,
@@ -39,19 +30,7 @@ export function _createMockAttestations(
   startId: anchor.BN = new anchor.BN(1),
   schemaIds: anchor.BN[]
 ): [Attestation[], string[]] {
-  let attestation: {
-    id: anchor.BN;
-    schemaId: anchor.BN;
-    linkedAttestationId: anchor.BN;
-    attestTimestamp: anchor.BN;
-    revokeTimestamp: anchor.BN;
-    attester: PublicKey;
-    validUntil: anchor.BN;
-    dataLocation: any;
-    revoked: boolean;
-    recipients: Array<PublicKey>;
-    data: Buffer;
-  } = {
+  let attestation: Attestation = {
     id: startId,
     schemaId: schemaIds[0],
     linkedAttestationId: new anchor.BN(0),
@@ -65,19 +44,7 @@ export function _createMockAttestations(
     recipients: _createMockRecipients(),
   };
 
-  let attestation2: {
-    id: anchor.BN;
-    schemaId: anchor.BN;
-    linkedAttestationId: anchor.BN;
-    attestTimestamp: anchor.BN;
-    revokeTimestamp: anchor.BN;
-    attester: PublicKey;
-    validUntil: anchor.BN;
-    dataLocation: any;
-    revoked: boolean;
-    recipients: Array<PublicKey>;
-    data: Buffer;
-  } = {
+  let attestation2: Attestation = {
     id: startId.add(new anchor.BN(1)),
     schemaId: schemaIds[1],
     linkedAttestationId: new anchor.BN(0),

@@ -11,3 +11,13 @@ export interface Attestation {
   recipients: Array<PublicKey>;
   data: Buffer;
 }
+
+export interface Schema {
+    id: anchor.BN;
+    registrant: PublicKey;
+    revocable: boolean;
+    dataLocation: any;
+    maxValidFor: anchor.BN;
+    timestamp: anchor.BN;
+    data: string;
+  }
