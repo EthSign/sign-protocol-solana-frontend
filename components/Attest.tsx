@@ -33,9 +33,10 @@ function Attest(props: AttestProps) {
       const validUntil = document.getElementById("validUntil") as HTMLInputElement;
       const dataLocation = document.getElementById("dataLocation") as HTMLInputElement;
       const indexingKey = document.getElementById("indexingKey") as HTMLInputElement;
-      const dataInput = document.getElementById("dataInput") as HTMLInputElement;
-      const recipients = dataInput.value
-        ? (JSON.parse(dataInput.value ?? "[]") as string[]).map((val) => new PublicKey(val))
+      const dataInput = document.getElementById("dataInputAttest") as HTMLInputElement;
+      const recip = document.getElementById("recipients") as HTMLInputElement;
+      const recipients = recip.value
+        ? (JSON.parse(recip.value ?? "[]") as string[]).map((val) => new PublicKey(val))
         : [wallet.publicKey];
       let attestation: Attestation = {
         id: attKey,
@@ -93,7 +94,7 @@ function Attest(props: AttestProps) {
         <input className="mx-auto text-black" placeholder="Valid Until (bignumber)" id="validUntil" />
         <input className="mx-auto text-black" placeholder="Indexing Key" id="indexingKey" />
         <input className="mx-auto text-black" placeholder="Linked Attestation ID" id="linkedAttestation" />
-        <input className="mx-auto text-black" placeholder="Data" id="dataInput" />
+        <input className="mx-auto text-black" placeholder="Data" id="dataInputAttest" />
         <input className="mx-auto text-black" placeholder="Recipients (JS array)" id="recipients" />
         <input id="attestSchemaId" placeholder="Schema ID" className="text-black mx-auto" />
         <button
